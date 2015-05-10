@@ -1,7 +1,6 @@
 .wrapper
   .page
     // test
-    //display: none
     position: relative
     width: 100%
     height: 100%
@@ -47,9 +46,28 @@
         +image-size("common/drawCircle.png", 2)
         +rotateY(180deg)
 
+    &:nth-child(9),
+    &:nth-child(10)
+      .pic
+        position: absolute
+        +trbl(auto, 0, 40px, 0)
+        +image-size("common/illust.jpg", 1.5)
+        margin: auto
+
+    &:nth-child(9)
+      .msg
+        top: -300px
+
+    &:nth-child(10)
+      .msg
+        top: -200px
+
     +msgSize(2, 96px)
     +msgSize(3, 72px)
     +msgSize(4, 84px)
-    +msgSize(5, 96px)
+    +msgSize(5, 72px)
     +msgSize(6, 72px)
     +msgSize(7, 64px)
+    +msgSize(9, 56px)
+    +msgSize(10, 42px)
+    +msgSize(11, 42px)

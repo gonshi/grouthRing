@@ -1,24 +1,31 @@
 extends /layout/_application
 block body
   div.wrapper
+    // 1
     div.page
       p.msg 成長する円
       p.txt 株式会社カヤック 田島真悟
+    // 2
     div.page
-      p.msg 「継続は力なり」<br>ということわざがあります
+      p.msg 「継続は力なり」<br>という言葉があります
+    // 3
     div.page
-      p.msg 10年かけて作品を制作する<br>というテーマから、僕はこのことわざを<br>表現したいと思いました。 
+      p.msg 10年かけて作品を制作する<br>というテーマから、僕はこの言葉を<br>視覚的に表現しようと思いました。 
+    // 4
     div.page
       p.msg 人間、どんな技能でも<br>毎日繰り返し行うことで、<br>その精度は磨かれていきます。
     // 5
     div.page
-      p.msg 例えば、<br>「円を描く」<br>というシンプルな行為
+      p.msg 例えば、「円を描く」<br>という非常にシンプルな行為を<br>例として考えてみます。
+    // 6
     div.page
       p.msg たかがこれだけのことでも、<br>10年間毎日繰り返せば徐々に綺麗な円が<br>描けるようになっていくでしょう。
+    // 7
     div.page
       p.draw_pic
         img(src="img/common/hand.png" alt="hand")
-      p.msg しかし、利き手で描いてもつまらないので、<br>より初期能力値の低い“非”利き手で描く<br>というルールにしましょう。 
+      p.msg しかし、利き手で描いてもつまらないので、<br>より初期能力値の低い“非”利き手で描く<br>というルールにします。 
+    // 8
     div.page.drawPage
       p.draw_pic
         img(src="img/common/hand.png" alt="hand")
@@ -52,11 +59,20 @@ block body
         p.msg 5年が過ぎ、
         p.msg 10年が経ったとき、
         p.msg 僕の腕はきっと、<br>きれいな円が描けるように<br>なっているはずです。
-        p.msg この10年描き続けた円、<br>3652個を統合し、
+        p.msg この10年間描き続けた円、<br>3652個を統合し、
         p.msg “年輪”として表現します。 
+    // 9
     div.page
-      //p.msg 年輪の溝と溝の間隔を2mmとし、約直径1.5 
       p.pic
         img(src="img/common/illust.jpg" alt="説明図")
-    //
+      p.msg 実際の年輪と同じように、<br>中央から輪をスタートし、<br>年月を経るごとに外側へと<br>輪が広がっていくように刻みます。 
+    // 10
+    div.page
+      p.pic
+        img(src="img/common/illust.jpg" alt="説明図")
+      p.msg 10年分の年輪が刻まれた切り株は<br>3Dプリンタで出力されます。<br><br>観察してみると、<br>中央付近ではまだ歪んだ形だった輪が、<br>外側にいくほどに綺麗で整った輪に<br>なっていく姿がわかるはずです。
+    // 11
+    div.page
+      p.msg (補足)<br>3652日分、全ての円を年輪に起こすと、<br>仮に輪と輪の幅を2mmと設定しても直径約15mの<br>切り株ができあがってしまい現実的ではないため、<br>実際には10日分ごとに円を集計し、<br>それぞれ各10個ずつの円の平均となるパスを出力する<br>といった処理を行おうと考えています。
+
   p.next Press Enter to Next
