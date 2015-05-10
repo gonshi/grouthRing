@@ -1,0 +1,55 @@
+.wrapper
+  .page
+    // test
+    //display: none
+    position: relative
+    width: 100%
+    height: 100%
+
+    .msg
+      position: absolute
+      +trbl(0, 0, 0, 0)
+      height: $lineHeight * 1
+      margin: auto
+      font-size: 128px
+      font-weight: bold
+      text-align: center
+      +open-face(#fff, 2)
+
+    .txt
+      position: absolute
+      +trbl(200px, 0, 0, 0)
+      height: $lineHeight * 1
+      line-height: 1
+      margin: auto
+      font-size: 56px
+      text-align: center
+      +open-face(#fff, 2)
+
+    &:nth-child(1)
+      .msg
+        top: -200px
+
+    &:nth-child(5)
+      +bg("common/drawCircle.png", cover)
+
+    &:nth-child(7)
+      .msg
+        top: -300px
+
+    &:nth-child(7),
+    &:nth-child(8)
+      .draw_pic
+        // test
+        //display: none
+        position: absolute
+        +trbl(auto, 0, -50px, auto)
+        +image-size("common/drawCircle.png", 2)
+        +rotateY(180deg)
+
+    +msgSize(2, 96px)
+    +msgSize(3, 72px)
+    +msgSize(4, 84px)
+    +msgSize(5, 96px)
+    +msgSize(6, 72px)
+    +msgSize(7, 64px)

@@ -1,0 +1,26 @@
+.sp
+  display: none
+
+body
+  position: absolute
+  +trbl(0, 0, 0, 0)
+  overflow: hidden
+
+.wrapper
+  height: 100%
+
+.next
+  position: fixed
+  +trbl(auto, 150px, 50px, auto)
+  font-size: 24px
+  opacity: 0
+
+  &:after
+    $bg: "common/arrow.png"
+    position: absolute
+    +trbl(0, -50px, 0, auto)
+    +image-size($bg, 8)
+    margin: auto
+    +bg($bg)
+    +animation(arrow 1s ease 0s infinite)
+    content: ""

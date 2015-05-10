@@ -1,0 +1,47 @@
+=bg($img, $size: contain, $repeat: no-repeat, $position: center )
+  background: image-url($img) $repeat $position 
+  background-size: $size
+
+=image-size($name, $pixel: $pixelRatio)
+  width: image-width($name) / $pixel
+  height: image-height($name) / $pixel
+
+  img
+    width: 100%
+    height: auto
+
+=image-txt( $img )
+  +image-size( $img )
+  +bg( $img )
+  @extend %hideText
+
+=trbl( $top: auto, $right: auto, $bottom: auto, $left:auto )
+  @if $top != auto
+    top: $top
+  @if $right != auto
+    right: $right
+  @if $bottom != auto
+    bottom: $bottom
+  @if $left != auto
+    left: $left
+
+=sprite($img, $num)
+  width: image-width($img)
+  height: image-height($img) / $num
+  background-image: image-url($img)
+  background-size: 100% auto
+  +sprite-position($img, $num, 0)
+
+=sprite-position($img, $totalNum, $num)
+  background-position: 0 -1 * image-height($img) / $totalNum * $num
+
+=open-face($color, $width)
+  text-shadow: 2px * $width 0px 0px $color, -1.74661px * $width -0.97435px * $width 0px $color, 1.05064px * $width 1.70181px * $width 0px $color, -0.08846px * $width -1.99804px * $width 0px $color, -0.89615px * $width 1.78799px * $width 0px $color, 1.65367px * $width -1.12488px * $width 0px $color, -1.99218px * $width 0.17674px * $width 0px $color, 1.82588px * $width 0.81619px * $width 0px $color, -1.19692px * $width -1.60231px * $width 0px $color, 0.26467px * $width 1.98241px * $width 0px $color, 0.73464px * $width -1.86019px * $width 0px $color, -1.5478px * $width 1.26662px * $width 0px $color, 1.96876px * $width -0.35209px * $width 0px $color, -1.89086px * $width -0.65165px * $width 0px $color, 1.33383px * $width 1.49027px * $width 0px $color, -0.43882px * $width -1.95127px * $width 0px $color, -0.56738px * $width 1.91783px * $width 0px $color
+
+=lato()
+  font-family: 'Lato', sans-serif
+
+=msgSize($num, $font-size)
+  &:nth-child(#{$num})
+    .msg
+      font-size: $font-size

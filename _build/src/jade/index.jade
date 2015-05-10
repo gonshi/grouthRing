@@ -1,0 +1,62 @@
+extends /layout/_application
+block body
+  div.wrapper
+    div.page
+      p.msg 成長する円
+      p.txt 株式会社カヤック 田島真悟
+    div.page
+      p.msg 「継続は力なり」<br>ということわざがあります
+    div.page
+      p.msg 10年かけて作品を制作する<br>というテーマから、僕はこのことわざを<br>表現したいと思いました。 
+    div.page
+      p.msg 人間、どんな技能でも<br>毎日繰り返し行うことで、<br>その精度は磨かれていきます。
+    // 5
+    div.page
+      p.msg 例えば、<br>「円を描く」<br>というシンプルな行為
+    div.page
+      p.msg たかがこれだけのことでも、<br>10年間毎日繰り返せば徐々に綺麗な円が<br>描けるようになっていくでしょう。
+    div.page
+      p.draw_pic
+        img(src="img/common/hand.png" alt="hand")
+      p.msg しかし、利き手で描いてもつまらないので、<br>より初期能力値の低い“非”利き手で描く<br>というルールにしましょう。 
+    div.page.drawPage
+      p.draw_pic
+        img(src="img/common/hand.png" alt="hand")
+      div.complete
+        - for (var i = 0; i < 16; i++){
+          p.complete_circle
+            img(src="img/circle_begin/#{(i % 8) + 1}.png" alt="circle")
+        - }
+        - for (var i = 0; i < 17; i++){
+          p.complete_circle
+            img(src="img/circle_middle/#{(i % 8) + 1}.png" alt="circle")
+        - }
+        - for (var i = 0; i < 15; i++){
+          p.complete_circle
+            img(src="img/circle_fin/#{(i % 8) + 1}.png" alt="circle")
+        - }
+      div.drawnCircle_container
+      canvas.canvas
+      p.draw_hand
+        img(src="img/common/hand.png" alt="hand")
+      p.date.
+        DAY <span class="date_num">1</span>
+      div.tree_container
+        - for (var i = 0; i < 5; i++){
+          p.tree
+        - }
+      div.msg_container
+        p.msg 最初はきっと、うまく描けずに<br>いびつな円になってしまうでしょう。
+        p.msg しかし、毎日毎日描き続け、 
+        p.msg 1年が過ぎ、
+        p.msg 5年が過ぎ、
+        p.msg 10年が経ったとき、
+        p.msg 僕の腕はきっと、<br>きれいな円が描けるように<br>なっているはずです。
+        p.msg この10年描き続けた円、<br>3652個を統合し、
+        p.msg “年輪”として表現します。 
+    div.page
+      //p.msg 年輪の溝と溝の間隔を2mmとし、約直径1.5 
+      p.pic
+        img(src="img/common/illust.jpg" alt="説明図")
+    //
+  p.next Press Enter to Next
