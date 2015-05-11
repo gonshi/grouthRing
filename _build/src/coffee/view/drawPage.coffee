@@ -357,8 +357,8 @@ class DrawCircle extends EventDispatcher
     _skipCount = ->
       _from = parseInt _$date_num.text()
       _MAX_DATE = 3605
-      _FIRST_YEAR = 365
-      _FIVE_YEAR = 365 * 5
+      _FIRST_YEAR = 200
+      _FIVE_YEAR = 365 * 4
 
       _shown_first_year = false
       _shown_five_year = false
@@ -415,7 +415,7 @@ class DrawCircle extends EventDispatcher
 
       _canvas.resetContext _win_width, _win_height
       _circle_r = ( _$win.width() - _WHOLE_PADDING * 2 - _WHOLE_MARGIN *
-                 ( _WHOLE_CIRCLE_WIDTH_MAX - 1 ) ) / _WHOLE_CIRCLE_WIDTH_MAX
+                  ( _WHOLE_CIRCLE_WIDTH_MAX - 1 ) ) / _WHOLE_CIRCLE_WIDTH_MAX
 
       $( ".drawnCircle" ).css width: _circle_r
       _setCompleteCircle()
@@ -467,72 +467,70 @@ class DrawCircle extends EventDispatcher
       _$drawnCircle_container.append _$drawnCircle
       
       _circle_img = new Image()
+      _circle_img.onload = ->
+        _circle = new Canvas $( "<canvas>" )
+        _circle.resetContext(
+          _circle_position.x_max - _circle_position.x_min + _DRAW_LINE_WIDTH,
+          _circle_position.y_max - _circle_position.y_min + _DRAW_LINE_WIDTH
+        )
+        _circle.drawImg(
+          _circle_img,
+          _circle_position.x_min - _DRAW_LINE_WIDTH / 2,
+          _circle_position.y_min - _DRAW_LINE_WIDTH / 2
+        )
+
+        # 描いたcanvasデータをimgタグに置き換え
+        _canvas.clear()
+        $( "<img>" ).attr( src: _circle.getImg() ).appendTo _$drawnCircle
+        _$drawnCircle.css
+          top: _circle_position.y_min - _DRAW_LINE_WIDTH / 2
+          left: _circle_position.x_min - _DRAW_LINE_WIDTH / 2
+
+        _wait = if _circle_count == 0 then _DUR * 12 else _DUR * 2
+        _wait = _DUR / 2 if window.dev
+
+        _$drawnCircle.delay( _wait ).velocity
+          top: Math.floor( _circle_count / _WHOLE_CIRCLE_WIDTH_MAX ) *
+               _circle_r + _WHOLE_MARGIN * Math.floor( _circle_count /
+               _WHOLE_CIRCLE_WIDTH_MAX ) + _WHOLE_PADDING
+          left: ( _circle_count % _WHOLE_CIRCLE_WIDTH_MAX ) * _circle_r +
+                _WHOLE_MARGIN * ( _circle_count %
+                _WHOLE_CIRCLE_WIDTH_MAX ) + _WHOLE_PADDING
+          width: _circle_r
+        , _DUR
+
+        _circle_count += 1
+
+        _$date_num.text _circle_count
+        _$date.show().velocity
+          translateX: [ 0, 20 ]
+          opacity: [ 1, 0 ]
+        , _DUR
+
+        if _circle_count >= _DRAW_CIRCLE_MAX
+          _wait = if window.dev then _DUR / 2 else _DUR * 4
+          setTimeout ( -> _appendCircleBegin() ), _wait
+          return
+
+        _wait = if window.dev then _DUR / 4 else _DUR * 3
+        if _circle_count == 1
+          _$draw_hand.velocity opacity: [ 0, 1 ], _DUR
+          mouseHandler.off()
+          ticker.clear "MOVE_HAND"
+          _wait = if window.dev then _DUR / 2 else _DUR * 16
+          if !window.dev
+            setTimeout (-> _showNextMsg() ), _DUR * 3
+        else if _circle_count == 2
+          if !window.dev
+            setTimeout (-> _showNextMsg() ), _DUR * 3
+
+        setTimeout ->
+          _initDrawData()
+          _autoDraw _circle_count
+          _$date.velocity opacity: [ 0, 1 ], _DUR
+        , _wait
+
       _circle_img.src = _canvas.getImg()
-
-      _circle = new Canvas $( "<canvas>" )
-      _circle.resetContext(
-        _circle_position.x_max - _circle_position.x_min + _DRAW_LINE_WIDTH,
-        _circle_position.y_max - _circle_position.y_min + _DRAW_LINE_WIDTH
-      )
-      _circle.drawImg(
-        _circle_img,
-        -_circle_position.x_min + _DRAW_LINE_WIDTH / 2,
-        -_circle_position.y_min + _DRAW_LINE_WIDTH / 2
-      )
-
-      # 描いたcanvasデータをimgタグに置き換え
-      _canvas.clear()
-      $( "<img>" ).attr( src: _circle.getImg() ).appendTo _$drawnCircle
-      _$drawnCircle.css
-        top: _circle_position.y_min - _DRAW_LINE_WIDTH / 2
-        left: _circle_position.x_min - _DRAW_LINE_WIDTH / 2
-
-      _wait = if _circle_count == 0 then _DUR * 12 else _DUR * 2
-      _wait = _DUR / 2 if window.dev
-
-      _$drawnCircle.delay( _wait ).velocity
-        top: Math.floor( _circle_count / _WHOLE_CIRCLE_WIDTH_MAX ) * _circle_r +
-             _WHOLE_MARGIN * Math.floor( _circle_count /
-             _WHOLE_CIRCLE_WIDTH_MAX ) + _WHOLE_PADDING
-             
-        left: ( _circle_count % _WHOLE_CIRCLE_WIDTH_MAX ) * _circle_r +
-              _WHOLE_MARGIN * ( _circle_count %
-              _WHOLE_CIRCLE_WIDTH_MAX ) + _WHOLE_PADDING
-        width: _circle_r
-      , _DUR
-
-      _circle_count += 1
-      _circle_img = null
-      _circle = null
-
-      _$date_num.text _circle_count
-      _$date.show().velocity
-        translateX: [ 0, 20 ]
-        opacity: [ 1, 0 ]
-      , _DUR
-
-      if _circle_count >= _DRAW_CIRCLE_MAX
-        _wait = if window.dev then _DUR / 2 else _DUR * 4
-        setTimeout ( -> _appendCircleBegin() ), _wait
-        return
-
-      _wait = if window.dev then _DUR / 4 else _DUR * 3
-      if _circle_count == 1
-        _$draw_hand.velocity opacity: [ 0, 1 ], _DUR
-        mouseHandler.off()
-        ticker.clear "MOVE_HAND"
-        _wait = if window.dev then _DUR / 2 else _DUR * 16
-        if !window.dev
-          setTimeout (-> _showNextMsg() ), _DUR * 3
-      else if _circle_count == 2
-        if !window.dev
-          setTimeout (-> _showNextMsg() ), _DUR * 3
-
-      setTimeout ->
-        _initDrawData()
-        _autoDraw _circle_count
-        _$date.velocity opacity: [ 0, 1 ], _DUR
-      , _wait
 
     #########################
     # INIT

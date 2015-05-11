@@ -13,8 +13,10 @@ class CanvasManager
 
   clear: -> @ctx.clearRect 0, 0, @canvas.width, @canvas.height
 
-  drawImg: ( img, x, y )-> @ctx.drawImage img, x, y
-
+  drawImg: ( img, x, y )->
+    @ctx.drawImage img, x, y, @canvas.width, @canvas.height,
+                   0, 0, @canvas.width, @canvas.height
+  
   drawLine: ( to_x, to_y, from_x, from_y )->
     @ctx.beginPath()
     @ctx.moveTo from_x, from_y
