@@ -140,6 +140,7 @@ class DrawCircle extends EventDispatcher
           queue: false
 
         setTimeout ->
+          $( ".drawPage .date" ).velocity opacity: [ 0, 1 ], _DUR / 2
           _$complete.velocity opacity: [ 0, 1 ], _DUR
           _$tree_container.velocity opacity: [ 1, 0 ], _DUR
 

@@ -78,7 +78,7 @@ $ ->
 
   window.dev = false
   window.record = false
-  window.preview = false
+  window.preview = true
 
   # test
   #drawPage.exec()
