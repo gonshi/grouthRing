@@ -271,7 +271,8 @@ class DrawCircle extends EventDispatcher
       _next_t = _span
       _MAX_DATE = 3652
 
-      _showNextMsg() if !window.dev
+      @msg_count = 4 if window.dev
+      _showNextMsg()
 
       ticker.listen "APPEND_CIRCLE_FIN", ( t )=>
         if t > _next_t
