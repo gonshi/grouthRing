@@ -83,6 +83,7 @@ $ ->
   # test
   #drawPage.exec()
 
+  return if window.isSp
   setTimeout ( -> _setNextBtn() ), 1
 
   $page.each -> # 行数に合わせて高さを調整
